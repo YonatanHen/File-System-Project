@@ -14,7 +14,7 @@ public class RootDirectory extends Directory {
      * Constructs the "root" directory instance.
      */
     private RootDirectory() {
-        super("root", new Date());
+        super("root");
     }
 
     /**
