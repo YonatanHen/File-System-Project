@@ -5,7 +5,6 @@ import model.File;
 import model.Item;
 import model.RootDirectory;
 
-import java.security.InvalidParameterException;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -19,56 +18,31 @@ public class FileSystem {
      * Constructs a File System with the root directory.
      */
     public FileSystem() {
-        root = RootDirectory.getInstance();
-    }
-
-    public void addFile(String parentDirName, String fileName, int fileSize) {
-        Directory parentDir = FindAndValidateDirectory(parentDirName);
-        parentDir.addItem(new File(fileName, fileSize));
-    }
-
-    public void addDir(String parentDirName, String dirName) {
-        Directory parentDir = FindAndValidateDirectory(parentDirName);
-        parentDir.addItem(new Directory(dirName));
-    }
-
-    public void getFileSize(String fileName) {
-
-    }
-
-    public void getBiggestFile() {
-
-    }
-
-    public void showFileSystem() {
-
-    }
-
-    public void delete(String name) {
-
+        this.root = RootDirectory.getInstance();
     }
 
     /**
-     * This function runs a BFS algorithm that finds a file/directory in the system.
-     * If not such item exists, returns null.
+     * Utility function that run a BFS algorithm which finds a directory in the system.
+     * If not such directory exists, returns null.
      *
-     * @param itemName The name of the searched item.
-     * @return An Item object if exists, otherwise null.
+     * Time complexity: O(V+E) where V is the number of directories (vertex) and E is the number of items (both files or empty directories, i.e. edges).
+     * Space complexity: O(N) where N is the number of the items in the system.
+     *
+     * @param dirName The name of the searched directory.
+     * @return Directory object if exists, otherwise null.
      */
-    private Item FindItem(String itemName) {
+    private Directory FindDirectory(String dirName) {
         Queue<Item> q = new LinkedList<>();
-        q.add(root);
+        q.add(this.root);
 
         while(!q.isEmpty()) {
             // Retrieve the item at the front of the Q and removes it.
             Item current = q.poll();
 
-            if (current.getName().equals(itemName)) {
-                return current;
-            }
-
             if (current instanceof Directory dir) {
-                // Enqueue all subdirectories and files of the current directory.
+                if (dir.getName().equals(dirName)) {
+                    return dir;
+                }
                 q.addAll(dir.getDictionaryItems());
             }
         }
@@ -76,20 +50,71 @@ public class FileSystem {
         return null;
     }
 
-    /**
-     * This function finds the directory with the given name in the system and validate
-     * the item is an instance of Directory
-     *
-     * @param parentDirName The name of the parent Directory that should be found in the system.
-     * @return The instance of the parent directory.
-     */
-    private Directory FindAndValidateDirectory(String parentDirName) {
-        Item item = FindItem(parentDirName);
+    public void addFile(String parentDirName, String fileName, int fileSize) {
+        Directory parentDir = FindDirectory(parentDirName);
+        if (parentDir != null) {
+            parentDir.addItem(new File(fileName, fileSize));
+        } else {
+            throw new IllegalArgumentException(String.format("No such directory with the name of %s found in the system.", parentDirName));
+        }
+    }
 
-        if (!(item instanceof Directory dir)) {
-            throw new InvalidParameterException("The parentDirName provide is a name of a File, not a Directory");
+    public void addDir(String parentDirName, String dirName) {
+        Directory parentDir = FindDirectory(parentDirName);
+        if (parentDir != null) {
+            parentDir.addItem(new Directory(dirName));
+        } else {
+            throw new IllegalArgumentException(String.format("No such directory with the name of %s found in the system.", parentDirName));
+        }
+    }
+
+    public long getFileSize(String fileName) {
+        Queue<Item> q = new LinkedList<>();
+        q.add(this.root);
+
+        while(!q.isEmpty()) {
+            // Retrieve the item at the front of the Q and removes it.
+            Item current = q.poll();
+
+            if (current instanceof File file && current.getName().equals(fileName)) {
+                return file.getSize();
+            } else if (current instanceof Directory dir) {
+                q.addAll(dir.getDictionaryItems());
+            }
         }
 
-        return dir;
+        return -1;
+    }
+
+    public long getBiggestFile() {
+        Queue<Item> q = new LinkedList<>();
+        q.add(this.root);
+
+        // File size must be a positive number.
+        long maxSize = -1;
+
+        while(!q.isEmpty()) {
+            // Retrieve the item at the front of the Q and removes it.
+            Item current = q.poll();
+
+            if (current instanceof File file && file.getSize() > maxSize) {
+                maxSize = file.getSize();
+            } else if (current instanceof Directory dir) {
+                q.addAll(dir.getDictionaryItems());
+            }
+        }
+
+        return maxSize;
+    }
+
+    /**
+     * DFS!
+     */
+    public void showFileSystem() {
+        
+    }
+
+    public void delete(String name) {
+
     }
 }

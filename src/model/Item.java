@@ -30,4 +30,17 @@ public abstract class Item {
     public Date getCreationDate() {
         return creationDate;
     }
+
+    /**
+     * This method is overridden by subclasses to provide their string representation.
+     *
+     * @param indent The level of indentation.
+     * @return The string representation of the item.
+     */
+    public abstract String toString(int indent);
+
+    @Override
+    public String toString() {
+        return toString(0); // Default level 0 for root directory
+    }
 }

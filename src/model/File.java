@@ -13,10 +13,18 @@ public class File extends Item {
      */
     public File (String name, long size) {
         super(name);
+        if (size<0) {
+            throw new IllegalArgumentException("File size must be a positive integer.");
+        }
         this.size = size;
     }
 
     public long getSize() {
         return size;
+    }
+
+    @Override
+    public String toString() {
+        return "File" + super.toString() + " | " + size;
     }
 }

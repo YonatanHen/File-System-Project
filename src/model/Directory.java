@@ -30,4 +30,18 @@ public class Directory extends Item {
             this.items.add(file);
         }
     }
+
+    @Override
+    public String toString(int indent) {
+        String indentation = "  ".repeat(indent); // Indentation based on depth
+        StringBuilder sb = new StringBuilder();
+        sb.append(indentation).append("Directory").append(super.toString()).append("\n");
+
+        // Recursively add the items in the directory with increased indentation
+        for (Item item : items) {
+            sb.append(item.toString(indent + 1)).append("\n");
+        }
+
+        return sb.toString();
+    }
 }
