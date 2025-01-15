@@ -14,8 +14,8 @@ public class Directory extends Item {
      *
      * @param name The name of the directory, up to 32 characters.
      */
-    public Directory (String name, Date creationDate) {
-        super(name, creationDate);
+    public Directory (String name) {
+        super(name);
         this.items = new ArrayList<Item>();
     }
 
