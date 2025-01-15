@@ -25,4 +25,12 @@ public class Directory extends Item {
     public ArrayList<Item> getDictionaryItems() {
         return items;
     }
+
+    public void addItem(Item item) {
+        if (item instanceof Directory dir) {
+            this.items.add(dir);
+        } else if (item instanceof File file) {
+            this.items.add(file);
+        }
+    }
 }
