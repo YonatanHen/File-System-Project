@@ -12,4 +12,8 @@ public class Directory extends Item {
         super(name, creationDate);
         this.items = new ArrayList<Item>();
     }
+
+    public ArrayList<Item> getDictionaryItems() {
+        return items;
+    }
 }

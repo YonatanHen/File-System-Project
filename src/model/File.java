@@ -11,4 +11,8 @@ public class File extends Item {
         super(name, creationDate);
         this.size = size;
     }
+
+    public long getSize() {
+        return size;
+    }
 }

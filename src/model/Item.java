@@ -14,4 +14,12 @@ public abstract class Item {
         this.name = name;
         this.creationDate = creationDate;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
 }
