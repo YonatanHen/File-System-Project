@@ -14,7 +14,7 @@ public abstract class Item {
      *
      * @param name The name of the item, up to 32 characters.
      */
-    public Item(String name) {
+    public Item(String name, Date creationDate) {
         if (name.length() > 32) {
             throw new IllegalArgumentException("Name can't contain more than 32 characters!");
         }
