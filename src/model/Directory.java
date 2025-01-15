@@ -8,7 +8,7 @@ public class Directory extends Item {
     private Date creationDate;
     private ArrayList<Item> items;
 
-    public Directory (String name, long size, Date creationDate) {
+    public Directory (String name, Date creationDate) {
         super(name, creationDate);
         this.items = new ArrayList<Item>();
     }
