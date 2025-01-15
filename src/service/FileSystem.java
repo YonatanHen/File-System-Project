@@ -111,7 +111,7 @@ public class FileSystem {
      * DFS!
      */
     public void showFileSystem() {
-        
+        System.out.println(root.toString());
     }
 
     public void delete(String name) {

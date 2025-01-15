@@ -24,7 +24,8 @@ public class File extends Item {
     }
 
     @Override
-    public String toString() {
-        return "File" + super.toString() + " | " + size;
+    public String toString(int indent) {
+        String indentation = "  ".repeat(indent); // Indentation based on depth
+        return indentation + "File" + super.toString() + " | " + size;
     }
 }
