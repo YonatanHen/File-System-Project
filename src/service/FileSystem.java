@@ -5,6 +5,7 @@ import model.File;
 import model.Item;
 import model.RootDirectory;
 
+import java.security.InvalidParameterException;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -22,11 +23,13 @@ public class FileSystem {
     }
 
     public void addFile(String parentDirName, String fileName, int fileSize) {
-
+        Directory parentDir = FindAndValidateDirectory(parentDirName);
+        parentDir.addItem(new File(fileName, fileSize));
     }
 
     public void addDir(String parentDirName, String dirName) {
-
+        Directory parentDir = FindAndValidateDirectory(parentDirName);
+        parentDir.addItem(new Directory(dirName));
     }
 
     public void getFileSize(String fileName) {
@@ -52,7 +55,7 @@ public class FileSystem {
      * @param itemName The name of the searched item.
      * @return An Item object if exists, otherwise null.
      */
-    public Item FindItem(String itemName) {
+    private Item FindItem(String itemName) {
         Queue<Item> q = new LinkedList<>();
         q.add(root);
 
@@ -71,5 +74,22 @@ public class FileSystem {
         }
 
         return null;
+    }
+
+    /**
+     * This function finds the directory with the given name in the system and validate
+     * the item is an instance of Directory
+     *
+     * @param parentDirName The name of the parent Directory that should be found in the system.
+     * @return The instance of the parent directory.
+     */
+    private Directory FindAndValidateDirectory(String parentDirName) {
+        Item item = FindItem(parentDirName);
+
+        if (!(item instanceof Directory dir)) {
+            throw new InvalidParameterException("The parentDirName provide is a name of a File, not a Directory");
+        }
+
+        return dir;
     }
 }
