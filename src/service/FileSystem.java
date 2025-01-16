@@ -32,7 +32,7 @@ public class FileSystem {
      * @param dirName The name of the searched directory.
      * @return Directory object if exists, otherwise null.
      */
-    private Directory FindDirectory(String dirName) {
+    public Directory FindDirectory(String dirName) {
         Queue<Item> q = new LinkedList<>();
         q.add(this.root);
 
