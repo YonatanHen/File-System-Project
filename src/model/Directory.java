@@ -41,14 +41,13 @@ public class Directory extends Item {
     @Override
     public String toString(int indent) {
         String indentation = "  ".repeat(indent); // Indentation based on depth
-        StringBuilder sb = new StringBuilder();
-        sb.append(indentation).append("Directory").append(super.toString()).append("\n");
+        StringBuilder result = new StringBuilder(indentation + "Directory | " + getName() + " | " + getCreationDate());
 
         // Recursively add the items in the directory with increased indentation
         for (Item item : items) {
-            sb.append(item.toString(indent + 1)).append("\n");
+            result.append("\n").append(item.toString(indent + 1)); // Proper indentation and line breaks
         }
 
-        return sb.toString();
+        return result.toString();
     }
 }

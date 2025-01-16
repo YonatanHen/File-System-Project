@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * The file system service which includes the implementation of the requirements.
+ * The file system service which includes the implementation of the required function and initialize the root folder.
  */
 public class FileSystem {
     private RootDirectory root;

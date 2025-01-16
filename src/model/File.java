@@ -33,6 +33,6 @@ public class File extends Item {
     @Override
     public String toString(int indent) {
         String indentation = "  ".repeat(indent); // Indentation based on depth
-        return indentation + "File" + super.toString() + " | " + size;
+        return indentation + "File | " + getName() + " | " + getCreationDate() + " | " + this.size;
     }
 }
