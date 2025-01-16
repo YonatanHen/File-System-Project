@@ -5,6 +5,7 @@ import model.File;
 import model.Item;
 import model.RootDirectory;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -118,7 +119,30 @@ public class FileSystem {
         System.out.println(root.toString());
     }
 
+    /**
+     * Deletes the Directory or the File with this name.
+     *
+     * @param name The name of the item that should be deleted.
+     */
     public void delete(String name) {
+        Queue<Item> q = new LinkedList<>();
+        q.add(this.root);
 
+        while(!q.isEmpty()) {
+            Item current = q.poll();
+
+            if (current instanceof Directory dir) {
+                ArrayList<Item> items = dir.getDictionaryItems();
+                for (int i = 0; i < items.size(); i++) {
+                    if (items.get(i).getName().equals(name)) {
+                        items.remove(i);
+                        System.out.println("Item \"" + name + "\" has been deleted.");
+                        return;
+                    }
+                }
+            }
+        }
+
+        throw new IllegalArgumentException("No item with the name \"" + name + "\" found in the system.");
     }
 }
