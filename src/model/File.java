@@ -23,6 +23,13 @@ public class File extends Item {
         return size;
     }
 
+    /**
+     * Time complexity: O(1)
+     * Space complexity: O(1)
+     *
+     * @param indent The level of indentation.
+     * @return A string representation of the File.
+     */
     @Override
     public String toString(int indent) {
         String indentation = "  ".repeat(indent); // Indentation based on depth

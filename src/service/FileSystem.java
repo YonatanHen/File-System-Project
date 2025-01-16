@@ -108,7 +108,11 @@ public class FileSystem {
     }
 
     /**
-     * DFS!
+     * Displays all files & directories with their hierarchical structure (a file should display all
+     * file properties and a directory should display all directory properties)
+     *
+     * Time complexity: O(N) similarly to the toString() function in the Directory class.
+     * Space complexity: O(D+N) similarly to the toString() function in the Directory class.
      */
     public void showFileSystem() {
         System.out.println(root.toString());

@@ -31,6 +31,13 @@ public class Directory extends Item {
         }
     }
 
+    /**
+     * Time Complexity: O(N) where N is the number of nested items.
+     * Space complexity: O(D+N) where N is the number of nested items, and D is the depth of the directory hierarchy.
+     *
+     * @param indent The level of indentation.
+     * @return A string representation of current Directory and its subdirectories (if exist).
+     */
     @Override
     public String toString(int indent) {
         String indentation = "  ".repeat(indent); // Indentation based on depth
