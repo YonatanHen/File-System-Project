@@ -16,7 +16,6 @@ public class Main {
         System.out.println("The size of file 1.txt is: " + fs.getFileSize("1.txt"));
         fs.delete("home");
         fs.delete("2.txt");
-        fs.delete("root");
         fs.showFileSystem();
     }
 }
