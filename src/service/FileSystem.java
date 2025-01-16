@@ -121,12 +121,13 @@ public class FileSystem {
      *
      * @return The size of the largest file in bytes, or -1 if there are no files in the system.
      */
-    public long getBiggestFile() {
+    public String getBiggestFile() {
         Queue<Item> q = new LinkedList<>();
         q.add(this.root);
 
         // File size must be a positive number.
         long maxSize = -1;
+        String fileName = "";
 
         while(!q.isEmpty()) {
             // Retrieve the item at the front of the Q and removes it.
@@ -134,12 +135,13 @@ public class FileSystem {
 
             if (current instanceof File file && file.getSize() > maxSize) {
                 maxSize = file.getSize();
+                fileName = file.getName();
             } else if (current instanceof Directory dir) {
                 q.addAll(dir.getDictionaryItems());
             }
         }
 
-        return maxSize;
+        return fileName;
     }
 
     /**
@@ -159,9 +161,13 @@ public class FileSystem {
      * Space complexity: O(N) where N is the maximum number of items at any level of the hierarchy.
      *
      * @param name The name of the item that should be deleted.
-     * @throws IllegalArgumentException if the provided name not found in the system.
+     * @throws IllegalArgumentException if root folder provided or the provided name not found in the system.
      */
     public void delete(String name) {
+        if (name.equals("root")) {
+            throw new IllegalArgumentException("root folder can not be deleted!");
+        }
+
         Queue<Item> q = new LinkedList<>();
         q.add(this.root);
 
