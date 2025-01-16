@@ -24,5 +24,6 @@ A Directory has the following attributes:
 ### Development Process
 This project developed with openjdk-23 on Intellij community IDE. 
 Each feature developed on a different branch, then merged to the main branch.
+
 In addition, tests were created. In order to run them, please make sure JUnit installed on this project.
 
