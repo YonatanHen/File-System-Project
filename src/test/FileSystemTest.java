@@ -25,11 +25,11 @@ public class FileSystemTest {
 
     @Test
     public void testAddDirectory() {
-        assertDoesNotThrow(() -> fs.addDir("home", "photos"),
+        assertDoesNotThrow(() -> fs.addDir("home", "documents"),
                 "Adding a directory should not throw an exception if the parent directory exists");
 
         Directory dir = fs.FindDirectory("photos");
-        assertNotNull(dir, "The directory 'photos' should exist in the file system");
+        assertNotNull(dir, "The directory 'documents' should exist in the file system");
     }
 
     @Test
@@ -37,13 +37,28 @@ public class FileSystemTest {
         String parentDirName = "nonexistent";
         IllegalArgumentException exception = assertThrowsExactly(
                 IllegalArgumentException.class,
-                () -> fs.addDir(parentDirName, "photos"),
+                () -> fs.addDir(parentDirName, "music"),
                 "Expected IllegalArgumentException to be thrown when parent directory does not exist"
         );
 
         assertEquals(
                 exception.getMessage(),
                 String.format("No such directory with the name of %s found in the system.", parentDirName)
+        );
+    }
+
+    @Test
+    public void testAddFileWithExistingName() {
+        String fileName = "1.txt";
+        IllegalArgumentException exception = assertThrowsExactly(
+                IllegalArgumentException.class,
+                () -> fs.addFile("home", fileName, 100),
+                "Expected IllegalArgumentException to be thrown when a file with the same name already exists in the system."
+        );
+
+        assertEquals(
+                exception.getMessage(),
+                String.format("An item called " + fileName + " already exists in the system.", fileName)
         );
     }
 

@@ -60,7 +60,7 @@ public class FileSystem {
      * @param itemName The name of the item that needs to be checked.
      */
     private void checkIfItemExists(String itemName) {
-        if (this.itemsNames.contains(itemsNames)) {
+        if (this.itemsNames.contains(itemName)) {
             throw new IllegalArgumentException("An item called " + itemName + " already exists in the system.");
         }
     }
@@ -100,6 +100,7 @@ public class FileSystem {
         Directory parentDir = FindDirectory(parentDirName);
         if (parentDir != null) {
             parentDir.addItem(new Directory(dirName));
+            itemsNames.add(dirName);
         } else {
             throw new IllegalArgumentException(String.format("No such directory with the name of %s found in the system.", parentDirName));
         }
