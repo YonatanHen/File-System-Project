@@ -22,10 +22,10 @@ A Directory has the following attributes:
   
 
 ### Development Process
-This project developed with openjdk-23 on Intellij community IDE. 
-Each feature developed on a different branch, then merged to the main branch.
+This project was developed with OpenJDK-23 on IntelliJ community IDE. 
+Each feature developed on a different branch and then merged into the main branch.
 
-In addition, tests were created. In order to run them, please make sure JUnit installed on this project.
+In addition, tests were created. In order to run them, please make sure JUnit is installed on this project.
 
 ### Output example
 Attached below is an output example for the following code snippet:
