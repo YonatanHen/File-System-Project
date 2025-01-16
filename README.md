@@ -1,7 +1,7 @@
 # File System Project
 
 ### Description
-This program handles and manage a file system structure.
+This program handles and manages a file system structure.
 
 The file system contains the following entities and operations:
 A File has the following attributes:
