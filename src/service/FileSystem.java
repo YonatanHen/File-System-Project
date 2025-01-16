@@ -5,21 +5,21 @@ import model.File;
 import model.Item;
 import model.RootDirectory;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * The file system service which includes the implementation of the required function and initialize the root folder.
  */
 public class FileSystem {
     private RootDirectory root;
+    private Set<String> itemsNames;
 
     /**
      * Constructs a File System with the root directory.
      */
     public FileSystem() {
         this.root = RootDirectory.getInstance();
+        this.itemsNames = new HashSet<>();
     }
 
     /**
@@ -52,6 +52,20 @@ public class FileSystem {
     }
 
     /**
+     * Utility function that check if an item with the same name already exists.
+     *
+     * Time complexity: O(1) constant time for finding a value in a hash set.
+     * Space complexity: O(1)
+     *
+     * @param itemName The name of the item that needs to be checked.
+     */
+    private void checkIfItemExists(String itemName) {
+        if (this.itemsNames.contains(itemsNames)) {
+            throw new IllegalArgumentException("An item called " + itemName + " already exists in the system.");
+        }
+    }
+
+    /**
      * Adds a new file with its parameters to the specified directory.
      * Time complexity: O(V+E), where V is the number of directories and E is the total number of items in the file system.
      * Space complexity: O(N), where N is the maximum number of items at any level of the hierarchy.
@@ -62,9 +76,11 @@ public class FileSystem {
      * @throws IllegalArgumentException If the parent directory is not found.
      */
     public void addFile(String parentDirName, String fileName, int fileSize) {
+        checkIfItemExists(fileName);
         Directory parentDir = FindDirectory(parentDirName);
         if (parentDir != null) {
             parentDir.addItem(new File(fileName, fileSize));
+            itemsNames.add(fileName);
         } else {
             throw new IllegalArgumentException(String.format("No such directory with the name of %s found in the system.", parentDirName));
         }
@@ -80,6 +96,7 @@ public class FileSystem {
      * @throws IllegalArgumentException If the parent directory is not found.
      */
     public void addDir(String parentDirName, String dirName) {
+        checkIfItemExists(dirName);
         Directory parentDir = FindDirectory(parentDirName);
         if (parentDir != null) {
             parentDir.addItem(new Directory(dirName));
@@ -179,6 +196,7 @@ public class FileSystem {
                 for (int i = 0; i < items.size(); i++) {
                     if (items.get(i).getName().equals(name)) {
                         items.remove(i);
+                        itemsNames.remove(name);
                         System.out.println("Item \"" + name + "\" has been deleted.");
                         return;
                     }
