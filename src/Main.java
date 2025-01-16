@@ -11,11 +11,13 @@ public class Main {
         fs.addFile("root", "5.txt", 499);
         fs.addFile("home", "7.txt", 100);
         fs.addDir("home", "photos");
+        fs.addDir("photos", "music");
         fs.showFileSystem();
         System.out.println("Biggest file in the system is: " + fs.getBiggestFile());
         System.out.println("The size of file 1.txt is: " + fs.getFileSize("1.txt"));
         fs.delete("home");
         fs.delete("2.txt");
+
         fs.showFileSystem();
     }
 }

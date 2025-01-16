@@ -66,7 +66,9 @@ public class FileSystem {
     }
 
     /**
-     * Adds a new file with its parameters to the specified directory.
+     * Runs a BFS algorithm to find the parent directory
+     * and eventually adds a new file with its parameters to this directory.
+     *
      * Time complexity: O(V+E), where V is the number of directories and E is the total number of items in the file system.
      * Space complexity: O(N), where N is the maximum number of items at any level of the hierarchy.
      *
@@ -87,7 +89,9 @@ public class FileSystem {
     }
 
     /**
-     * Adds a new directory to the specified parent directory.
+     * Runs a BFS algorithm to find the parent directory
+     * and adds a new directory to this parent directory.
+     *
      * Time complexity: O(V+E), where V is the number of directories and E is the total number of items in the file system.
      * Space complexity: O(N), where N is the maximum number of items at any level of the hierarchy.
      *
@@ -107,7 +111,9 @@ public class FileSystem {
     }
 
     /**
-     * Retrieves the size of a file by its name.
+     * A BFS based finding algorithm that find the file in the system based on the file name
+     * and return its size.
+     *
      * Time complexity: O(V+E), where V is the number of directories and E is the total number of items in the file system.
      * Space complexity: O(N), where N is the maximum number of items at any level of the hierarchy.
      *
@@ -133,7 +139,8 @@ public class FileSystem {
     }
 
     /**
-     * Finds and returns the size of the largest file in the file system.
+     * A BFS based finding algorithm that returns the size of the largest file in the file system.
+     *
      * Time complexity: O(V+E), where V is the number of directories and E is the total number of items in the file system.
      * Space complexity: O(N), where N is the maximum number of items at any level of the hierarchy.
      *
@@ -164,7 +171,7 @@ public class FileSystem {
 
     /**
      * Displays all files & directories with their hierarchical structure (a file should display all
-     * file properties and a directory should display all directory properties)
+     * file properties and a directory should display all directory properties).
      *
      * Time complexity: O(N) similarly to the toString() function in the Directory class.
      * Space complexity: O(D+N) similarly to the toString() function in the Directory class.
@@ -174,10 +181,10 @@ public class FileSystem {
     }
 
     /**
-     * Deletes the Directory or the File with this name.
+     * Finds the Directory or the File in the system (BFS based) and deletes it.
      *
-     * Time complexity: O(N) where N is the total number of items.
-     * Space complexity: O(N) where N is the maximum number of items at any level of the hierarchy.
+     * Time complexity: O(V+E), where V is the number of directories and E is the total number of items in the file system.
+     * Space complexity: O(N), where N is the maximum number of items at any level of the hierarchy.
      *
      * @param name The name of the item that should be deleted.
      * @throws IllegalArgumentException if root folder provided or the provided name not found in the system.
